@@ -1,0 +1,41 @@
+<div class="row">
+  <form ng-submit="getEvents()">
+    <div class="col-xs-6 col-md-5">
+      <div class="form-group">
+        <ul>
+          <li><label>Select a date:</label></li>
+          <li><input type="date" required ng-Change="getEvents()" id="enterDate" class="form-control" ng-model="dateEntered"></li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</div> 
+<div class="row">
+  <form ng-submit="addEvent()">
+    <div class="col-xs-8 col-md-8"> 
+      <div class="form-group">
+        <ul>
+          <li><label>Add an event (press enter to submit):</label></li> 
+          <li><input required class="form-control" ng-model="event"></li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</div>
+<div ng-model="error" id="error">
+
+</div>
+<div>
+      <div class="events">
+        <div ng-repeat="event in events" class="row">
+          <div class="col-xs-1 col-md-1">
+          </div>
+          <div class="col-xs-9 col-md-9 bg-primary event ">
+            <div hidden>{{event.date}}</div>
+            <div>{{event.summary}}</div>
+          </div>
+        </div>
+      </div>
+
+</div>
+<div id="output"></div>
