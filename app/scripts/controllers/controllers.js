@@ -7,6 +7,7 @@ var myCalendarControllers = angular.module('calendarApp');
 //Controller for retrieving and adding events
 myCalendarControllers.controller('EventController', ['$scope', '$http', 'GoogleAuthService',
     function ($scope, $http, GoogleAuthService) {
+
     $scope.getEvents = function() {
       //First do an auth to see if the user is actually authenticated
       //if not, redirect to login screen. 
@@ -38,6 +39,12 @@ myCalendarControllers.controller('EventController', ['$scope', '$http', 'GoogleA
       } else {
         $scope.error = "Please enter a date."
       }
+    };
+
+    //Forces the user to first look at today's events upon authenticating with Google
+    $scope.init = function() {
+      $scope.dateEntered = new Date();
+      $scope.getEvents();
     };
 
   }]);
