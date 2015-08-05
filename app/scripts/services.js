@@ -49,7 +49,7 @@ googleCalServices.factory('GoogleAuthService', ['$window', '$q', function($windo
       //load the calendar
       gapi.client.load('calendar', 'v3', function() {
     		var date = el.date;
-    		var summary = el.summary
+    		var summary = el.summary;
     		var timeMin = new Date(date);
       		var timeMax = new Date(date);
       		timeMin.setHours(0,0,0,0);
@@ -82,7 +82,7 @@ googleCalServices.factory('GoogleAuthService', ['$window', '$q', function($windo
     }
 
     //Large method to get all the events the user has under their primary calendar
-    GoogleAuthService.getAllEvents = function(date) {
+    GoogleAuthService.getAllEvents = function(date, startTime, endTime) {
         var deferred = $q.defer(),
 
         // gets the primary calendar that the user has on Google Calendar
@@ -94,7 +94,7 @@ googleCalServices.factory('GoogleAuthService', ['$window', '$q', function($windo
               request.execute(function(resp) {
                   if(!resp.error) {
                     var calendarIds = [];
-                    //can get all calendars a user has, but we don't want that, 
+                    //can get all calendars a user has, but we don't want that,
                     //so this will do for now
                     for(var i = 0; i < 1; i++) {
                       calendarIds.push(resp.items[i].id);
@@ -113,10 +113,12 @@ googleCalServices.factory('GoogleAuthService', ['$window', '$q', function($windo
         getEvents = function() {
           	var events = [];
           	var eventsDeferred = $q.defer();
-          	var timeMin = new Date(date);
-      		var timeMax = new Date(date);
-      		timeMin.setHours(0,0,0,0);
-      		timeMax.setHours(24,0,0,0);
+          	var timeMin = new Date(startTime);
+						//console.log(startTime)
+						//var startTime = new Date(startTime);
+      		var timeMax = new Date(endTime);
+      		//timeMin.setHours(0,0,0,0);
+      		//timeMax.setHours(24,0,0,0);
 
           var request = gapi.client.calendar.events.list({
            'calendarId': 'primary',

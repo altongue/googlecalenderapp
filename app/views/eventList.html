@@ -4,18 +4,22 @@
       <div class="form-group">
         <ul>
           <li><label>Select a date:</label></li>
-          <li><input type="date" required ng-Change="getEvents()" id="enterDate" class="form-control" ng-model="dateEntered"></li>
+          <li><input type="date"  required ng-Change="getEvents()" id="enterDate" class="form-control" ng-model="dateEntered"></li>
+          <li><label>Select a start time:</label></li>
+          <li><input type="time" value="06:00" required ng-Change="getEvents()" id="startTime" class="form-control" ng-model="start"></input></li>
+          <li><label>Select a start time:</label></li>
+          <li><input type="time" value="18:00" required ng-Change="getEvents()" id="endTime" class="form-control" ng-model="end"></input></li>
         </ul>
       </div>
     </div>
   </form>
-</div> 
+</div>
 <div class="row">
   <form ng-submit="addEvent()">
-    <div class="col-xs-8 col-md-8"> 
+    <div class="col-xs-8 col-md-8">
       <div class="form-group">
         <ul>
-          <li><label>Add an event (press enter to submit):</label></li> 
+          <li><label>Add an event (press enter to submit):</label></li>
           <li><input required class="form-control" ng-model="event"></li>
         </ul>
       </div>
@@ -32,6 +36,10 @@
           </div>
           <div class="col-xs-9 col-md-9 bg-primary event ">
             <div hidden>{{event.date}}</div>
+            <div class="dateContainer">
+              <div style="float:left;">Start:</div> <div class="date">{{event.start.dateTime | date:"h:mm a" }}</div>
+              <div style="float:left;">End:</div> <div class="date"> {{event.end.dateTime | date:"h:mm a"}}</div>
+            </div>
             <div>{{event.summary}}</div>
           </div>
         </div>
